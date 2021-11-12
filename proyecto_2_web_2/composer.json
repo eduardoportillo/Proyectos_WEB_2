@@ -1,0 +1,15 @@
+{
+    "name": "portillo/api_pw2",
+    "autoload": {
+        "psr-4": {
+            "APIP2WEB2\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "eduardoportillo",
+            "email": "eportillovirreira@gmail.com"
+        }
+    ],
+    "require": {}
+}

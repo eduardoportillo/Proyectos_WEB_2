@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <link rel="stylesheet" href="../style.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Formular una pregunta</title>
+</head>
+<body>
+    <header>
+        <div class="contenedor_header">
+            <a href="../index.html"><img src="../img/logo_stackoverflow.jfif" alt="logo_stackoverflow" class="logo"></a>
+            <input type="text" placeholder="Buscar..." aria-label="Buscar" class="inputbuscar">
+            <a href="#"><img src="../img/avatar.png" alt="avatar" class="inline imgavatar"></a>
+            <a href="#"><img src="../img/otros botones.png" alt="botones" class="inline"></a>
+        </div>
+    </header>
+
+    <div class="formDoQuestion">   
+        <div class="Formular-una-pregunta" >
+            <div class="inline">
+                <h1 class="inline" id="h1-formular">Formular una pregunta</h1>
+            </div>
+            <img src="../img/banner-formular-una-pregunta.png" alt="banner" class="banner-pregunta">
+        </div>
+        
+        <form action="" id="Form-question">
+            <div id="div-form">
+
+                <div>
+                    <label for="pregunta">¿Cual es tu pregunta?</label>
+                    <br>
+                    <textarea name="pregunta" id="pregunta" cols="50" rows="5" placeholder=" ¿imagina que estas asiendo la pregunta a alguien? " style="resize:none"></textarea>
+                  </div>
+                  <br>
+                  <div>
+                    <label for="nombre">¿Cual es tu nombre?</label>
+                    <br>
+                    <input type="text" id="nombre" name="nombre" />
+                  </div>
+
+                  <p id="error"></p>
+                  
+                  <button type="button" id="button-singup" onclick="insertQuestion();" style="cursor: pointer;">Pregutar</button>
+            </div>
+        </form>
+    </div>
+    
+    <script src="./../scripts/FormDoQuestion.js"></script>
+</body>
+</html>

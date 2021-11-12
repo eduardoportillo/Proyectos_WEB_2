@@ -1,0 +1,17 @@
+{
+    "name": "portillo/proyecto_1_web_2",
+    "autoload": {
+        "psr-4": {
+            "App\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "eduardoportillo",
+            "email": "eportillovirreira@gmail.com"
+        }
+    ],
+    "require": {
+        "twbs/bootstrap": "5.1.0"
+    }
+}

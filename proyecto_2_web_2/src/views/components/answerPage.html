@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <link rel="stylesheet" href="../style.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Responde</title>
+</head>
+<body>
+    <header>
+        <div class="contenedor_header">
+            <a href="../index.html"><img src="../img/logo_stackoverflow.jfif" alt="logo_stackoverflow" class="logo"></a>
+            <input type="text" placeholder="Buscar..." aria-label="Buscar" class="inputbuscar">
+            <a href="#"><img src="../img/avatar.png" alt="avatar" class="inline imgavatar"></a>
+            <a href="#"><img src="../img/otros botones.png" alt="botones" class="inline"></a>
+        </div>
+    </header>
+
+        <h1 id="pregunta"></h1>
+
+        <div id="respuestas-div"></div>
+
+        <form>
+            <label for="nombre">¿Cual es tu Nombre?</label>
+            <br>
+            <input type="text" id="nombre" name="nombre" placeholder="Nombre...">
+            <br>
+            <br>
+            <label for="respuesta">Tu Respuesta</label>
+            <br>
+            <textarea name="respuesta" id="respuesta" cols="50" rows="10" placeholder="Responde Aqui..." style="resize:none"></textarea>
+            <br>
+            <p id="error"></p>
+            <buttontype="button" id="button-preguntar" onclick="insertRespuesta();" style="cursor: pointer;">Pregutar</button>
+        </form>
+
+        <script src="../scripts/FormRespuesta.js"></script>
+</body>
+</html>
