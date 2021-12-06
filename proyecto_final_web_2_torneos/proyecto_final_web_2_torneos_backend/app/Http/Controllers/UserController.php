@@ -18,24 +18,6 @@ class UserController extends Controller
         return response()->json($listaUsuario);
     }
 
-    public function store(Request $request)
-    {
-//        $validator = Validator::make($request->json()->all(), [
-//            "nombres" => ['required', 'string'],
-//            "apellidos" => ['required', 'string'],
-//            "edad" => ['required', 'int'],
-//            "ciudad" => ['required', 'string'],
-//            "fechaNacimiento" => ['required', 'date'],
-//            "genero" => ['required', 'int', 'min:-1', 'max:1']
-//        ]);
-//        if ($validator->fails()) {
-//            return response()->json($validator->messages(), Response::HTTP_BAD_REQUEST);
-//        }
-//        $persona = new Persona($request->json()->all());
-//        $persona->save();
-//        return response()->json($persona);
-
-    }
 
     public function show($id)
     {

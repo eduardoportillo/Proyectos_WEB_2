@@ -29,8 +29,8 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
-    // N a N inscripcion_torneo
-    public function torneos(){
-        return $this->belongsToMany(Torneo::class);
+
+    public function Torneos(){
+        return $this->hasMany(Torneo::class);
     }
 }

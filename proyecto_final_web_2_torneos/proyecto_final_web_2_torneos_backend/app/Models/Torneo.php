@@ -13,22 +13,24 @@ class Torneo extends Model
     protected $fillable = [
         'nombre',
         'juego_torneo',
-        'modalidad_torneo_id',
+        'modalidad_torneo',
         'fecha_inicio',
         'fecha_fin',
         'estado',
         'puntuacion_victoria',
-        'creador_user_id'
+        'puntuacion_empate',
+        'puntuacion_derrota',
+        'creador_user_id',
+        'nro_equipos',
+        'num_partidos'
     ];
 
-    // N a N User TorneoController
-    public function users(){
-        return $this->belongsToMany(User::class);
+    public function user(){
+        return $this->belongsTo(User::class);
     }
 
-    // 1 modalidad a N Torneos
-    public function modalidadTorneo(){
-        return $this->hasOne(ModalidadTorneo::class);
+    public function Equipos(){
+        return $this->hasMany(Equipo::class);
     }
 
 }

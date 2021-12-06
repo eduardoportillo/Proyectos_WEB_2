@@ -8,26 +8,25 @@ class CreateTorneosTable extends Migration
 {
     public function up()
     {
-        Schema::create('modalidad_torneo', function (Blueprint $table) {
-            $table->id();
-            $table->string('name_modalidad');
-        });
-
         Schema::create('torneos', function (Blueprint $table) {
             $table->id();
             $table->string('nombre');
             $table->String('juego_torneo');
-            $table->unsignedBigInteger('modalidad_torneo_id');
+            $table->string('modalidad_torneo');
             $table->dateTime('fecha_inicio');
             $table->dateTime('fecha_fin');
             $table->string('estado');
             $table->integer('puntuacion_victoria');
+            $table->integer('puntuacion_empate');
+            $table->integer('puntuacion_derrota');
             $table->unsignedBigInteger('creador_user_id');
+            $table->integer('nro_equipos');
+            $table->integer('num_partidos');
             $table->timestamps();
 
-            $table->foreign('modalidad_torneo_id')
+            $table->foreign('creador_user_id')
                 ->references('id')
-                ->on('modalidad_torneo')
+                ->on('users')
                 ->onDelete('cascade');
         });
 

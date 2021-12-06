@@ -12,6 +12,7 @@ class AuthController extends Controller
         if (!User::where('email', $request->json("email"))->exists()) {
             $user = User::create([
                 "name"=>$request->json("name"),
+                "last_name"=>$request->json("last_name"),
                 "email"=>$request->json("email"),
                 "password"=>bcrypt($request->json("password")),
             ]);

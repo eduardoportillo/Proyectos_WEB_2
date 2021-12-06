@@ -35,24 +35,39 @@ class RoleSeeder extends Seeder
             "name"=>"common_user"
         ]);
 
-        //Creando permisos
+        //Permisos
+        //Creando permisos User
+        $permissionListUser =   Permission::create(['name'=>'list user']);
         $permissionInsertUser = Permission::create(['name'=>'insert user']);
         $permissionUpdateUser = Permission::create(['name'=>'update user']);
         $permissionDeleteUser = Permission::create(['name'=>'delete user']);
-        $permissionListUser = Permission::create(['name'=>'list user']);
+
+        //Creando permisos Torneo
+        $permissionListTorneo =   Permission::create(['name'=>'list torneo']);
+        $permissionInsertTorneo = Permission::create(['name'=>'insert torneo']);
+        $permissionUpdateTorneo = Permission::create(['name'=>'update torneo']);
+        $permissionDeleteTorneo = Permission::create(['name'=>'delete torneo']);
 
         //Asignando Permisos a los Roles
-
         //Admin Role
+        $permissionListUser->assignRole($adminRole);
         $permissionInsertUser->assignRole($adminRole);
         $permissionUpdateUser->assignRole($adminRole);
         $permissionDeleteUser->assignRole($adminRole);
-        $permissionListUser->assignRole($adminRole);
+
+
+        $permissionListTorneo->assignRole($adminRole);
+        $permissionInsertTorneo->assignRole($adminRole);
+        $permissionUpdateTorneo->assignRole($adminRole);
+        $permissionDeleteTorneo->assignRole($adminRole);
 
         //CommonUser Role
         $permissionListUser->assignRole($commonUserRole);
 
-        //Asignando Roles
+        $permissionListTorneo->assignRole($commonUserRole);
+        $permissionInsertTorneo->assignRole($commonUserRole);
+
+        //Asignando Roles a los Usuarios Creador por Default
         $admin->assignRole("admin");
         $testCommonUser->assignRole("common_user");
     }

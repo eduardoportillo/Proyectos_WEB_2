@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\TorneoController;
 use App\Http\Controllers\UserController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -20,13 +21,15 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-Route::get("/indexuser",[UserController::class, "index"]);
-
-//Route::middleware('can:insert user')->post("/user/", [UserController::class, 'store']);
+// Permisos User
 Route::middleware('can:list user')->get("/user/", [UserController::class, 'index']);
 Route::middleware('can:update user')->match(['PUT', 'PATCH'], "/user/{id}/", [UserController::class, 'update']);
 Route::middleware('can:delete user')->delete("/user/{id}", [UserController::class, 'destroy']);
 Route::middleware('can:list user')->get("/user/{id}", [UserController::class, 'show']);
+
+// Permisos Torneo
+Route::middleware('can:list user')->get("/torneo/", [TorneoController::class, 'index']);
+Route::middleware('can:insert user')->post("/torneo/", [TorneoController::class, 'store']);
 
 //auth routes
 Route::post("/register", [AuthController::class, "register"])->name("register");
