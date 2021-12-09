@@ -4,6 +4,9 @@ namespace App\Http\Controllers;
 
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Response;
+use Illuminate\Support\Facades\Validator;
 
 class UserController extends Controller
 {
@@ -11,6 +14,7 @@ class UserController extends Controller
     {
         $this->middleware('auth:sanctum');
     }
+
 
     public function index()
     {
@@ -30,42 +34,41 @@ class UserController extends Controller
 
     public function update(Request $request, $id)
     {
-//        $persona = Persona::find($id);
-//        if ($persona == null) {
-//            return response()->json(array("message" => "Item not found"), Response::HTTP_NOT_FOUND);
-//        }
-//        if ($request->method() == 'PUT') {
-//            $validator = Validator::make($request->json()->all(), [
-//                "nombres" => ['required', 'string'],
-//                "apellidos" => ['required', 'string'],
-//                "edad" => ['required', 'int'],
-//                "ciudad" => ['required', 'string'],
-//                "fechaNacimiento" => ['required', 'date'],
-//            ]);
-//        } else {
-//            $validator = Validator::make($request->json()->all(), [
-//                "nombres" => ['string'],
-//                "apellidos" => ['string'],
-//                "edad" => ['int'],
-//                "ciudad" => ['string'],
-//                "fechaNacimiento" => ['date'],
-//            ]);
-//        }
-//        if ($validator->fails()) {
-//            return response()->json($validator->messages(), Response::HTTP_BAD_REQUEST);
-//        }
-//        $persona->fill($request->json()->all());
-//        $persona->save();
-//        return response()->json($persona);
+        $user = User::find($id);
+        if ($user == null) {
+            return response()->json(array("message" => "Item not found"), 404);
+        }
+        if ($request->method() == 'PUT') {
+            $validator = Validator::make($request->json()->all(), [
+                "name"=>['required', 'string'],
+                "last_name"=>['required', 'string'],
+                "email"=>['required', 'string'],
+                "password"=>['required', 'string']
+            ]);
+        } else {
+            $validator = Validator::make($request->json()->all(), [
+                "name"=>['string'],
+                "last_name"=>['string'],
+                "email"=>['string'],
+                "password"=>['string']
+            ]);
+        }
+        if ($validator->fails()) {
+            return response()->json($validator->messages(), 400);
+        }
+        $user->fill($request->json()->all());
+        $user->password = bcrypt($request->json("password"));
+        $user->save();
+        return response()->json($user);
     }
 
     public function destroy($id)
     {
-//        $persona = Persona::find($id);
-//        if ($persona == null) {
-//            return response()->json(array("message" => "Item not found"), Response::HTTP_NOT_FOUND);
-//        }
-//        $persona->delete();
-//        return response()->json(['success' => true]);
+       $user = User::find($id);
+       if ($user == null) {
+           return response()->json(array("message" => "Item not found"), 404);
+       }
+       $user->delete();
+       return response()->json(['delete_success' => true]);
     }
 }

@@ -11,10 +11,10 @@ class CreatePartidasTable extends Migration
         Schema::create('partidas', function (Blueprint $table) {
             $table->id();
             $table->dateTime('fecha');
-            $table->unsignedBigInteger('id_equipo_1');
-            $table->unsignedBigInteger('id_equipo_2');
+            $table->unsignedBigInteger('id_equipo_1')->nullable();
+            $table->unsignedBigInteger('id_equipo_2')->nullable();
             $table->integer('nro_ronda');
-            $table->integer('resultado');
+            $table->integer('resultado')->nullable();
             $table->timestamps();
 
             $table->foreign('id_equipo_1')

@@ -34,8 +34,8 @@ class AuthController extends Controller
             ]);
         } else {
             return response()->json([
-                "message" => "Unauthenticated."
-            ], 401);
+                "Error" => "Not Found."
+            ], 404);
         }
     }
 }

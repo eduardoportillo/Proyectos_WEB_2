@@ -15,13 +15,19 @@ class CreateEquiposTable extends Migration
     {
         Schema::create('equipos', function (Blueprint $table) {
             $table->id();
-            $table->string('nombre_equipo');
+            $table->string('nombre_equipo')->nullable();
             $table->unsignedBigInteger('torneo_id');
+            $table->unsignedBigInteger('user_id')->nullable();
             $table->timestamps();
 
             $table->foreign('torneo_id')
                 ->references('id')
                 ->on('torneos')
+                ->onDelete('cascade');
+
+            $table->foreign('user_id')
+                ->references('id')
+                ->on('users')
                 ->onDelete('cascade');
         });
     }

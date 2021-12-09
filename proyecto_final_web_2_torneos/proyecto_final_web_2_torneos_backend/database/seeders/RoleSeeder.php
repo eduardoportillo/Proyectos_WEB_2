@@ -44,6 +44,7 @@ class RoleSeeder extends Seeder
 
         //Creando permisos Torneo
         $permissionListTorneo =   Permission::create(['name'=>'list torneo']);
+        $permissionListMisTorneo =   Permission::create(['name'=>'list MisTorneo']);
         $permissionInsertTorneo = Permission::create(['name'=>'insert torneo']);
         $permissionUpdateTorneo = Permission::create(['name'=>'update torneo']);
         $permissionDeleteTorneo = Permission::create(['name'=>'delete torneo']);
@@ -62,10 +63,10 @@ class RoleSeeder extends Seeder
         $permissionDeleteTorneo->assignRole($adminRole);
 
         //CommonUser Role
-        $permissionListUser->assignRole($commonUserRole);
-
-        $permissionListTorneo->assignRole($commonUserRole);
+        //Torneos
+        $permissionListMisTorneo->assignRole($commonUserRole);
         $permissionInsertTorneo->assignRole($commonUserRole);
+        $permissionUpdateTorneo->assignRole($commonUserRole);
 
         //Asignando Roles a los Usuarios Creador por Default
         $admin->assignRole("admin");

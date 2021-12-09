@@ -6,7 +6,7 @@ import { useDispatch } from 'react-redux';
 import { guardarPermisos, sesionIniciada } from '../redux/loginSlice';
 
 const Login = () => {
-    // const dispatch = useDispatch();
+    const dispatch = useDispatch();
 
     const history = useHistory();
 
@@ -23,13 +23,13 @@ const Login = () => {
             .then(response => {
                 console.log('recibido', response.data);
                 const token = response.data.access_token;
-                // dispatch(sesionIniciada(token))
+                dispatch(sesionIniciada(token));
                 obtenerPermisos(token);
             }).catch(error => {
                 console.log(error);
             });
     }
-    const obtenerPermisos = (token) => {
+    const obtenerPermisos = (token) => {               //[ ] el error esta en que la consulta no devuelve los permisos.
         const url = 'http://localhost:8000/api/user';
         axios.get(url, {
             headers: {
@@ -52,7 +52,7 @@ const Login = () => {
                         }
                     });
                 });
-                // dispatch(guardarPermisos(permisos))
+                dispatch(guardarPermisos(permisos));
 
                 history.push('/personas');
             }).catch(error => {
@@ -72,7 +72,7 @@ const Login = () => {
                         <div><input className="form-control" type="email" value={email} onChange={(e) => {
                             setEmail(e.target.value);
                         }} /></div>
-                        <div><label>Contraseña:</label></div>
+                        <div><label>Apellidos:</label></div>
                         <div><input className="form-control" type="password" value={password} onChange={(e) => {
                             setPassword(e.target.value);
                         }} /></div>
@@ -86,5 +86,4 @@ const Login = () => {
         </Row>
     );
 }
-
 export default Login;

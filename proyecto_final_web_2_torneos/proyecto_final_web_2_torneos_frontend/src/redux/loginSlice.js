@@ -1,7 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit"
 
 const initialData = {
-    token: localStorage.getItem('token'),
+    // token: localStorage.getItem('token'),
     permisos: []
 }
 export const loginSlice = createSlice({
@@ -11,7 +11,7 @@ export const loginSlice = createSlice({
         sesionIniciada: (state, action) => {
             const token = action.payload;
             state.token = token
-            // localStorage.setItem('token', token);
+            localStorage.setItem('token', token);
         },
         guardarPermisos: (state, action) => {
             const permisos = action.payload;
@@ -19,7 +19,7 @@ export const loginSlice = createSlice({
         },
         sesionCerrada: (state) => {
             state.token = null
-            // localStorage.removeItem('token');
+            localStorage.removeItem('token');
         }
     }
 });
