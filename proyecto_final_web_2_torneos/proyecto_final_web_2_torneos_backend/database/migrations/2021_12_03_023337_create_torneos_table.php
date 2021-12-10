@@ -14,14 +14,13 @@ class CreateTorneosTable extends Migration
             $table->String('juego_torneo');
             $table->string('modalidad_torneo');
             $table->dateTime('fecha_inicio');
-            $table->dateTime('fecha_fin');
+            $table->dateTime('fecha_fin')->nullable();
             $table->string('estado');
             $table->integer('puntuacion_victoria');
             $table->integer('puntuacion_empate');
             $table->integer('puntuacion_derrota');
             $table->unsignedBigInteger('creador_user_id');
             $table->integer('nro_equipos');
-            $table->integer('num_partidos');
             $table->timestamps();
 
             $table->foreign('creador_user_id')

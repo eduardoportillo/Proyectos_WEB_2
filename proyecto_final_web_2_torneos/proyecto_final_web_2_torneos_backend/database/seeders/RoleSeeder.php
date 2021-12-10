@@ -44,10 +44,18 @@ class RoleSeeder extends Seeder
 
         //Creando permisos Torneo
         $permissionListTorneo =   Permission::create(['name'=>'list torneo']);
-        $permissionListMisTorneo =   Permission::create(['name'=>'list MisTorneo']);
         $permissionInsertTorneo = Permission::create(['name'=>'insert torneo']);
         $permissionUpdateTorneo = Permission::create(['name'=>'update torneo']);
         $permissionDeleteTorneo = Permission::create(['name'=>'delete torneo']);
+
+        $permissionListMisTorneo =   Permission::create(['name'=>'list MisTorneo']);
+        $permissionIniciarTorneo = Permission::create(['name'=>'iniciar torneo']);
+
+        //Creando permisos Equipo
+        $permissionListEquipo =   Permission::create(['name'=>'list equipo']);
+        $permissionInsertEquipo = Permission::create(['name'=>'insert equipo']);
+        $permissionUpdateEquipo = Permission::create(['name'=>'update equipo']);
+        $permissionDeleteEquipo = Permission::create(['name'=>'delete equipo']);
 
         //Asignando Permisos a los Roles
         //Admin Role
@@ -62,11 +70,27 @@ class RoleSeeder extends Seeder
         $permissionUpdateTorneo->assignRole($adminRole);
         $permissionDeleteTorneo->assignRole($adminRole);
 
+        $permissionIniciarTorneo->assignRole($adminRole);
+
+        $permissionListEquipo->assignRole($adminRole);
+        $permissionInsertEquipo->assignRole($adminRole);
+        $permissionUpdateEquipo->assignRole($adminRole);
+        $permissionDeleteEquipo->assignRole($adminRole);
+
         //CommonUser Role
         //Torneos
-        $permissionListMisTorneo->assignRole($commonUserRole);
+        $permissionListUser->assignRole($commonUserRole);
         $permissionInsertTorneo->assignRole($commonUserRole);
         $permissionUpdateTorneo->assignRole($commonUserRole);
+
+        $permissionListMisTorneo->assignRole($commonUserRole);
+
+        $permissionIniciarTorneo->assignRole($commonUserRole);
+
+        $permissionListEquipo->assignRole($commonUserRole);
+        $permissionInsertEquipo->assignRole($commonUserRole);
+        $permissionUpdateEquipo->assignRole($commonUserRole);
+        $permissionDeleteEquipo->assignRole($commonUserRole);
 
         //Asignando Roles a los Usuarios Creador por Default
         $admin->assignRole("admin");
