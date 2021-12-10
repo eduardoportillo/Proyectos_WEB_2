@@ -21,8 +21,15 @@ class TorneoController extends Controller
         return response()->json($listaUsuario);
     }
 
-    public function misTorneos($id){
-        $listMisTorneos =  Torneo::select('torneos.*')->join('users',  'creador_user_id', '=', 'users.id')->where('users.id','=', $id)->get();
+    public function misTorneos(Request $request){
+            $user = $request->user();
+        $listMisTorneos =  Torneo::select('torneos.*')->join('users',  'creador_user_id', '=', 'users.id')->where('users.id','=', $user->id)->get();
+
+        return response()->json($listMisTorneos);
+    }
+
+    public function torneosAbiertos(){
+        $listMisTorneos =  Torneo::select('torneos.*')->where('estado','like','registro abierto')->get();
         return response()->json($listMisTorneos);
     }
 
@@ -47,7 +54,7 @@ class TorneoController extends Controller
             if (($request->json()->get('nro_equipos') % 2) == 0) {
                 $torneo = new Torneo($request->json()->all());
 
-                $torneo->estado = "creado";
+                $torneo->estado = "registro abierto";
 
                 $torneo->puntuacion_victoria = 3;
                 $torneo->puntuacion_empate   = 1;
@@ -142,13 +149,19 @@ class TorneoController extends Controller
 //        }
 
         if($torneo->modalidad_torneo === "Eliminación Simple"){
-            $torneoGenerado = GenerateRondaController::generateEliminacionSimple($torneo);
-            return response()->json($torneoGenerado, 200);;
+            $torneo->estado = $estadoTorneo;
+            $torneo->save();
+
+            GenerateRondaController::generateEliminacionSimple($torneo);
+            return response()->json($torneo, 200);;
         }
 
-//        if($torneo->modalidad_torneo === "Round Robin"){
-//                $torneoGenerado = GenerateRondaController::generateRoundRobin($torneo->nro_equipos);
-//                return response()->json($torneoGenerado);
-//        }
+        if($torneo->modalidad_torneo === "Round Robin"){
+            $torneo->estado = $estadoTorneo;
+            $torneo->save();
+                GenerateRondaController::generateRoundRobin($torneo);
+                return response()->json($torneo, 200);
+        }
+        return response()->json("Error al iniciar torno", 400);
     }
 }

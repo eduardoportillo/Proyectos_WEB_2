@@ -10,11 +10,13 @@ class CreatePartidasTable extends Migration
     {
         Schema::create('partidas', function (Blueprint $table) {
             $table->id();
-            $table->dateTime('fecha');
-            $table->unsignedBigInteger('id_equipo_1');
-            $table->unsignedBigInteger('id_equipo_2');
-            $table->unsignedBigInteger('partida_id');
-            $table->integer('nro_ronda');
+            $table->dateTime('fecha')->nullable();
+            $table->unsignedBigInteger('id_equipo_1')->nullable();
+            $table->unsignedBigInteger('id_equipo_2')->nullable();
+            $table->unsignedBigInteger('ganador_partida_1')->nullable();
+            $table->unsignedBigInteger('ganador_partida_2')->nullable();
+            $table->unsignedBigInteger('torneo_id')->nullable();
+            $table->integer('nro_ronda')->nullable();
             $table->integer('resultado')->nullable();
             $table->timestamps();
 
@@ -28,9 +30,19 @@ class CreatePartidasTable extends Migration
                 ->on('equipos')
                 ->onDelete('cascade');
 
-            $table->foreign('partida_id')
+            $table->foreign('ganador_partida_1')
                 ->references('id')
                 ->on('partidas')
+                ->onDelete('cascade');
+
+            $table->foreign('ganador_partida_2')
+                ->references('id')
+                ->on('partidas')
+                ->onDelete('cascade');
+
+            $table->foreign('torneo_id')
+                ->references('id')
+                ->on('torneos')
                 ->onDelete('cascade');
         });
     }

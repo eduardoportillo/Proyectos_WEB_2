@@ -17,10 +17,23 @@ class PartidaController extends Controller
         $partida = Partida::all();
         return response()->json($partida);
     }
+    public function  equipoByTorneo(Request $request){
+        $equipoByTorneo =  Partida::select('partidas.*')->join('torneos',  'torneo_id', '=', 'torneos.id')->where('torneos.id','=', $request->get("torneo_id"))->get();
+        return response()->json($equipoByTorneo);
+    }
 
-    public function store(Request $request)
-    {
-        //
+    public function partidaWin(Request $request){
+        $partida = Partida::find($request->get("partida_id"));
+        if ($partida == null) {
+            return response()->json(array("Error" => "Item not found"), 404);
+        }
+
+//        $partida = Partida::select('partida.*')->where('ganador_partida_1','=', $request->get("partida_id"));
+
+        $partida->resultado = $request->get("resultado");
+        $partida->save();
+        return response()->json($partida);
+
     }
 
     public function show($id)
